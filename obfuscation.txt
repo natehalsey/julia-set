@@ -1,3 +1,5 @@
+Note: this obviously won't run, but I thought the idea was cool regardless
+
 include<stdlib.h>
 include<stdio.h>
 include<math.h>
