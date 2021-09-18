@@ -10,6 +10,7 @@ typedef struct{
 typedef struct set{
     int nrows;
     int ncols;
+    int itr;
     double min_real;
     double max_real;
     double min_imag;
@@ -24,10 +25,11 @@ complex_number new_complex(double real_part, double imag_part){
     temp.imag_part = imag_part;
     return temp;
 }
-SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_imag, double max_imag, complex_number c){
+SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_imag, double max_imag, complex_number c, int itr){
     SET *temp = (struct set *)malloc(sizeof(struct set));
     temp -> nrows = nrows;
     temp -> ncols = ncols;
+    temp -> itr = itr;
     temp -> min_real = min_real;
     temp -> max_real = max_real;
     temp -> min_imag = min_imag;
@@ -95,10 +97,10 @@ int iterate_z(complex_number z, SET *set, int itr){
     }
     return count;
 }
-void set_julia(SET* set, int itr){
+void set_julia(SET* set){
     for (int i = 0; i < set->ncols; i++){
         for (int j = 0; j < set->nrows; j++){
-            if (iterate_z(set->complex_matrix[i][j],set,itr) != -1){
+            if (iterate_z(set->complex_matrix[i][j],set,set->itr) != -1){
                 set->julia_set[i][j] = "  ";
             } else {
                 set->julia_set[i][j] = "x ";
@@ -115,7 +117,8 @@ void print_julia(SET* set){
     }
 }
 int main(){
-    // width, height, min real, max real, min imaginary, max imaginary, complex_number c
+    
+    // width, height, min real, max real, min imaginary, max imaginary, complex_number c, iterations
     /* 
         Some choices of c:
             0.285 + 0i
@@ -128,10 +131,9 @@ int main(){
             0 - 0.8i
         set the iterations lower if a particular choice for c creates a sparse julia set, if you zoom into the set, set the iterations higher!
     */
-    SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156));
+    SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156),90);
     set_matrix(set);
-    // set, iterations, set note above
-    set_julia(set,60);
+    set_julia(set);
     print_julia(set);
     delete_set(set);
     free(set);
