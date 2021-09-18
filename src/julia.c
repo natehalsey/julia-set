@@ -24,7 +24,7 @@ complex_number new_complex(double real_part, double imag_part){
     temp.imag_part = imag_part;
     return temp;
 }
-SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_imag, double max_imag){
+SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_imag, double max_imag, complex_number c){
     SET *temp = (struct set *)malloc(sizeof(struct set));
     temp -> nrows = nrows;
     temp -> ncols = ncols;
@@ -32,7 +32,7 @@ SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_
     temp -> max_real = max_real;
     temp -> min_imag = min_imag;
     temp -> max_imag = max_imag;
-    temp ->c = new_complex(-0.8,0.156);
+    temp ->c = c;
     temp -> julia_set = (char ***)malloc(temp->nrows*sizeof(char**));
     temp -> complex_matrix = (complex_number **)malloc(temp->nrows * sizeof(complex_number*));
     for (int i = 0; i < temp->ncols; i++){
@@ -115,8 +115,10 @@ void print_julia(SET* set){
     }
 }
 int main(){
-    SET* set = new_set(100,100,-1,1,-1,1);
+    // width, height, min real, max real, min imaginary, max imaginary, complex_number c
+    SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156));
     set_matrix(set);
+    // set, iterations, note: set iterations lower if a particular julia set is too sparse
     set_julia(set,60);
     print_julia(set);
     delete_set(set);
