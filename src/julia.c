@@ -81,7 +81,6 @@ void delete_set(SET* set){
     set->complex_matrix=NULL;
 }
 int iterate_z(complex_number z, SET *set, int itr){
-    //printf("On (%f, %f)\n",z.real_part,z.imag_part);
     z = square(z);
     z = add(set->c,z);
     int count = 0;
