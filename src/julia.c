@@ -105,7 +105,6 @@ void set_julia(SET* set, int itr){
             }
         }
     }
-    system("clear");
 }
 void print_julia(SET* set){
     for (int i = 0; i < set->ncols; i++){
