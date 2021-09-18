@@ -2,4 +2,4 @@
 
 Creates a beautiful julia set for your pleasure
 
-![obfuscation](obfuscationCode.png)
+![obfuscation](rand/obfuscationCode.png)
