@@ -1,5 +1,5 @@
 # Julia Set
 
-Creates a beautiful zooming julia set for your pleasure
+Creates a beautiful julia set for your pleasure
 
 ![obfuscation](obfuscationCode.png)
