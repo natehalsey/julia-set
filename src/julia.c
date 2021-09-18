@@ -116,9 +116,21 @@ void print_julia(SET* set){
 }
 int main(){
     // width, height, min real, max real, min imaginary, max imaginary, complex_number c
+    /* 
+        Some choices of c:
+            0.285 + 0i
+            0.285 +0.1i
+            0.45 + 0.1428i
+            -0.70176 - 0.3842i
+            -0.835 - 0.2321i
+            -0.8 + 0.156i (default)
+            -0.7269 + 0.1889i
+            0 - 0.8i
+        set the iterations lower if a particular choice for c creates a sparse julia set, if you zoom into the set, set the iterations higher!
+    */
     SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156));
     set_matrix(set);
-    // set, iterations, note: set iterations lower if a particular julia set is too sparse
+    // set, iterations, set note above
     set_julia(set,60);
     print_julia(set);
     delete_set(set);
