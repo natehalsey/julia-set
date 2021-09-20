@@ -73,7 +73,7 @@ double absolute_complex(complex_number c){
     return sqrt(pow(c.real_part,2)+pow(c.imag_part,2));
 }
 void delete_set(SET* set){
-    for (int i = 0; i < set->ncols;i++){
+    for (int i = 0; i < set->nrows;i++){
         free(set->julia_set[i]);
         free(set->complex_matrix[i]);
     }
@@ -125,13 +125,13 @@ int main(){
             0.285 +0.1i
             0.45 + 0.1428i
             -0.70176 - 0.3842i
-            -0.835 - 0.2321i
+            -0.835 - 0.2321i 
             -0.8 + 0.156i (default)
             -0.7269 + 0.1889i
             0 - 0.8i
         set the iterations lower if a particular choice for c creates a sparse julia set, if you zoom into the set, set the iterations higher!
     */
-    SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156),90);
+    SET* set = new_set(100,100,-2,2,-2,2,new_complex(-0.835,-0.2321),20);
     set_matrix(set);
     set_julia(set);
     print_julia(set);
