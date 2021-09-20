@@ -131,7 +131,7 @@ int main(){
             0 - 0.8i
         set the iterations lower if a particular choice for c creates a sparse julia set, if you zoom into the set, set the iterations higher!
     */
-    SET* set = new_set(100,100,-2,2,-2,2,new_complex(-0.835,-0.2321),20);
+    SET* set = new_set(100,100,-1,1,-1,1,new_complex(-0.8,0.156),80);
     set_matrix(set);
     set_julia(set);
     print_julia(set);
