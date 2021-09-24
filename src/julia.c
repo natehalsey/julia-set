@@ -37,7 +37,7 @@ SET *new_set(int nrows, int ncols, double min_real, double max_real, double min_
     temp ->c = c;
     temp -> julia_set = (char ***)malloc(temp->nrows*sizeof(char**));
     temp -> complex_matrix = (complex_number **)malloc(temp->nrows * sizeof(complex_number*));
-    for (int i = 0; i < temp->ncols; i++){
+    for (int i = 0; i < temp->nrows; i++){
         temp->complex_matrix[i] = (complex_number *)malloc(temp->ncols*sizeof(complex_number));
         temp->julia_set[i] = (char**)malloc(temp->ncols*sizeof(char*));
     }
@@ -48,8 +48,8 @@ void set_matrix(SET* set){
     double imag_step = (fabs(set->min_imag)+fabs(set->max_imag))/(set->nrows-1);
     double real_itr = set->min_real;
     double imag_itr = set->min_imag;
-    for (int i = 0; i < set->ncols; i++){
-        for (int j = 0; j < set->nrows; j++){
+    for (int i = 0; i < set->nrows; i++){
+        for (int j = 0; j < set->ncols; j++){
             set->complex_matrix[i][j] = new_complex(real_itr,imag_itr);
             real_itr+=real_step;
         }
@@ -98,8 +98,8 @@ int iterate_z(complex_number z, SET *set, int itr){
     return count;
 }
 void set_julia(SET* set){
-    for (int i = 0; i < set->ncols; i++){
-        for (int j = 0; j < set->nrows; j++){
+    for (int i = 0; i < set->nrows; i++){
+        for (int j = 0; j < set->ncols; j++){
             if (iterate_z(set->complex_matrix[i][j],set,set->itr) != -1){
                 set->julia_set[i][j] = "  ";
             } else {
@@ -109,8 +109,8 @@ void set_julia(SET* set){
     }
 }
 void print_julia(SET* set){
-    for (int i = 0; i < set->ncols; i++){
-        for (int j = 0; j < set->nrows; j++){
+    for (int i = 0; i < set->nrows; i++){
+        for (int j = 0; j < set->ncols; j++){
             printf("%s",set->julia_set[i][j]);
         }
         printf("\n");
